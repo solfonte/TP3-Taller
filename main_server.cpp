@@ -18,7 +18,6 @@ bool validar_argumentos(int argc, char** argv,std::string &puerto,std::string &r
 int main(int argc, char** argv) {
   std::string puerto,root_file;
   if (!validar_argumentos(argc,argv,puerto,root_file)){
-    //excepcion?
     std::cout << "La cantidad de argumentos es incorrecta\n";
     return 1;
   }
