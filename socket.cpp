@@ -117,11 +117,13 @@ void Socket::conectar(const char* host,const char* service){
     }else{
       throw SocketException("Fallo la creacion del socket\n");
     }
-    freeaddrinfo(resultados);
-    if(!conecte){
-      throw SocketException("Fallo la conexion del socket\n");
-    }
+
     ptr = ptr->ai_next;
   }
+  if(!conecte){
+    throw SocketException("Fallo la conexion del socket\n");
+  }
+  freeaddrinfo(resultados);
+
 
 }
