@@ -7,20 +7,22 @@
 
 class Server{
   private:
-    std::string puerto;
+    std::string service;
     std::string root_file;
     Socket aceptador,peer;
     std::stringbuf buffer;
+    //Thread thread_aceptador;
 
   public:
     Server(const std::string& service,const std::string& root_file):
-    puerto(service),
+    service(service),
     root_file(root_file),
-    aceptador(service.c_str()),
-    //aceptador().aceptar(peer)
-    peer(aceptador.aceptar())//chequear por que viola encapsulameinto
+    aceptador(),
+    peer()
     {}
+    void run();
     void recibir();
+    void enviar();
 };
 
 #endif

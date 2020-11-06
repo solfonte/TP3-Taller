@@ -22,8 +22,15 @@ int main(int argc, char** argv) {
     return 1;
   }
   Server server = Server(puerto,root_file);
+  try{
+    server.run();
+  }catch(SocketException se){
+    std::cout << se.getError() <<"\n";
+
+  }
   char c;
   server.recibir();
+
   /*
   while((c = std::cin.get()) != 'q'){
     if (c != '\n'){

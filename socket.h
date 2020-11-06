@@ -21,14 +21,14 @@ class Socket{
   private:
     int fd;
     //ver si hace falta guardar el buffer aca creeria que no
-    void bind_and_listen(const char* host,const char* service);
   public:
+    void bind_and_listen(const char* host,const char* service);
     Socket(const int file_descriptor);
     Socket(const char* host,const char* service);
     Socket(const char* service);
     Socket(Socket&& socket);
     ~Socket();
-    int aceptar();
+    void aceptar(Socket& peer)const;
     Socket();
     void recibir(/*char* buffer*/);
     void conectar(const char* host,const char* service);

@@ -8,10 +8,6 @@ Socket::Socket(Socket&& socket){
   socket.fd = -1;
 }
 
-Socket::Socket(const char* host,const char* service){
-  this->conectar(host,service);
-}
-
 static void hints_innit(struct addrinfo* hints,
                         int ai_family,int ai_socktype,
                         int ai_flags){
@@ -21,12 +17,8 @@ static void hints_innit(struct addrinfo* hints,
   hints->ai_flags = ai_flags;
 }
 
-Socket::Socket(const char* service){
-  this->bind_and_listen(INADDR_ANY,service);
-}
-
 Socket::Socket(){
-  //pongo algo?
+  this->fd = -1;
 }
 
 void Socket::bind_and_listen(const char* host,const char* service){
@@ -56,13 +48,13 @@ void Socket::bind_and_listen(const char* host,const char* service){
   }
 }
 
-int Socket::aceptar(){
+void Socket::aceptar(Socket& peer)const {
   int fd = accept(this->fd, NULL, NULL);
   if (fd < 0){
     throw SocketException("No se pudo aceptar el peer\n");
   }
   std::cout << "acepte" << "\n";
-  return fd;
+  peer.fd = fd;
 }
 
 Socket::Socket(const int file_descriptor){
@@ -117,13 +109,10 @@ void Socket::conectar(const char* host,const char* service){
     }else{
       throw SocketException("Fallo la creacion del socket\n");
     }
-
     ptr = ptr->ai_next;
   }
+  freeaddrinfo(resultados);
   if(!conecte){
     throw SocketException("Fallo la conexion del socket\n");
   }
-  freeaddrinfo(resultados);
-
-
 }
