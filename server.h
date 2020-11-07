@@ -3,6 +3,7 @@
 #include "socket.h"
 #include <string>
 #include <sstream>
+#include <map>
 
 
 class Server{
@@ -10,7 +11,8 @@ class Server{
     std::string service;
     std::string root_file;
     Socket aceptador,peer;
-    std::stringbuf buffer;
+    std::stringstream petitorio;
+    std::map<std::string,std::string> request;
     //Thread thread_aceptador;
 
   public:
@@ -18,11 +20,15 @@ class Server{
     service(service),
     root_file(root_file),
     aceptador(),
-    peer()
+    peer(),
+    petitorio(),
+    request()
+    //verificar que exista archivo
     {}
     void run();
     void recibir();
     void enviar();
+    void shutdown();
 };
 
 #endif

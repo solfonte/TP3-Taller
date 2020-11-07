@@ -9,10 +9,12 @@ void Client::run(){
 }
 
 void Client::enviar(){
-  std::string linea;
-  while(std::getline(std::cin,linea,'\n')){
-    if (linea.size() != 0){
-      std::cout << "hola\n";
+  std::string petitorio = " ";
+  while (getline(std::cin,petitorio,'\n') && petitorio.size() != 0){
+    if(petitorio.size() != 0){
+      petitorio.push_back('\n');
+      this->client.enviar(petitorio.c_str(),petitorio.size());
     }
   }
+  this->client.cerrar_conexion(SHUT_WR);
 }

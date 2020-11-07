@@ -57,17 +57,17 @@ void Socket::aceptar(Socket& peer)const {
   peer.fd = fd;
 }
 
-Socket::Socket(const int file_descriptor){
-  this->fd = file_descriptor;
-}
-
 Socket::~Socket(){
   if (this->fd > -1){
     close(this->fd);
   }//capza shut down
 }
 
-void Socket::recibir(/*char* buffer*/){
+ssize_t Socket::recibir(char* buffer,size_t length){
+  return recv(this->fd,buffer,length,0);
+}
+/*
+void Socket::recibir(char* buffer){
   ssize_t bytes_recv = 0;
   bool termine = false, hubo_error = false;
   char buffer[20];
@@ -76,12 +76,12 @@ void Socket::recibir(/*char* buffer*/){
     size_t tam_recv = length - (size_t)bytes_recv;
     ssize_t resultado_recv = recv(this->fd,buffer,tam_recv,0);
     bytes_recv = resultado_recv;
-    std::cout << buffer<< "\n";
     if (resultado_recv == -1){
       hubo_error = true;
     }else if (resultado_recv == 0){
       termine = true;
     }else{
+      std::cout << buffer<< "\n";
       if(resultado_recv < length){
         buffer[resultado_recv] = '\n';
       }
@@ -89,7 +89,7 @@ void Socket::recibir(/*char* buffer*/){
     }
   }
 }
-
+*/
 void Socket::conectar(const char* host,const char* service){
   bool conecte = false;
   struct addrinfo hints;
@@ -115,4 +115,26 @@ void Socket::conectar(const char* host,const char* service){
   if(!conecte){
     throw SocketException("Fallo la conexion del socket\n");
   }
+}
+
+void Socket::enviar(const char* buffer, size_t length){
+  bool hubo_un_error = false, termine = false;
+  ssize_t bytes_env = 0;
+  while (!hubo_un_error && !termine){
+    size_t tam_enviar = length - (size_t)bytes_env;
+    ssize_t res_env = send(this->fd,&buffer[bytes_env],
+                      tam_enviar,MSG_NOSIGNAL);
+    if (res_env == ERROR){
+      //hubo_un_error = true;
+      throw SocketException("Hubo un error al enviar\n");
+    }else if (res_env == 0){
+      termine = true;
+    }else{
+      bytes_env += res_env;
+    }
+  }
+}
+
+void Socket::cerrar_conexion(int modo){
+  shutdown(this->fd,modo);
 }

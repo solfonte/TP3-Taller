@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
   Client cliente = Client(host,service);
   try{
     cliente.run();
-  }catch(SocketException se){
+  }catch(const SocketException& se){
     std::cout << se.getError();
     return 0;
   }
