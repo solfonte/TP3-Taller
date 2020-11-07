@@ -6,7 +6,7 @@ class Metodo{
   public:
     virtual std::string obtener_respuesta() = 0;
     Metodo();//deberia borrarlo
-    virtual ~Metodo() {} 
+    virtual ~Metodo() {}
 };
 
 class GetSinRecurso: public Metodo{
@@ -20,8 +20,14 @@ class GetSinRecurso: public Metodo{
 };
 
 class GetConRecurso: public Metodo{
+  private:
+    bool recurso_existe;
+    std::string contenido_recurso;
   public:
-    GetConRecurso();
+    GetConRecurso(bool recurso_existe,std::string contenido):
+      recurso_existe(recurso_existe),
+      contenido_recurso(contenido)
+      {}
      std::string obtener_respuesta() override;
 };
 

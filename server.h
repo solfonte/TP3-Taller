@@ -12,7 +12,7 @@ class Server{
     std::string root_file;
     Socket aceptador,peer;
     std::stringstream petitorio;
-    std::map<std::string,std::string> request;
+    std::map<std::string,std::string> recursos;
     //Thread thread_aceptador;
 
   public:
@@ -22,13 +22,16 @@ class Server{
     aceptador(),
     peer(),
     petitorio(),
-    request()
+    recursos()
     //verificar que exista archivo
     {}
+    std::string get_contenido_recurso(const std::string& recurso) const;
+    std::string get_archivo_root();
     void run();
     void recibir();
     void enviar();
     void shutdown();
+    void guardar_recurso(std::string& recurso,std::string& contenido);
 };
 
 #endif

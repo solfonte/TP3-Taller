@@ -28,7 +28,7 @@ void Server::recibir(){
     }
   }
   Parser parser;
-  Metodo* metodo = parser.run(this->petitorio);
+  Metodo* metodo = parser.run(*this,this->petitorio.str());
   std::string rta = metodo->obtener_respuesta();
   std::cout << rta << "\n";
   delete metodo;
@@ -44,4 +44,20 @@ void Server::run(){
   this->aceptador.bind_and_listen(INADDR_ANY,servicio_aux);
   //lanzo el thread acetador y ahi se llama al accept
   this->aceptador.aceptar(this->peer);
+}
+
+std::string Server::get_contenido_recurso(const std::string& recurso) const{
+  std::string contenido("");
+  try{
+    contenido = this->recursos.at(recurso);
+  }catch (const std::out_of_range& oor){}
+  return contenido;
+}
+
+std::string Server::get_archivo_root(){
+  return this->root_file;
+}
+
+void Server::guardar_recurso(std::string& recurso,std::string& contenido){
+  this->recursos[recurso] = contenido;
 }
