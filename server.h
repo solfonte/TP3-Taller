@@ -3,28 +3,28 @@
 #include "socket.h"
 #include <string>
 #include <sstream>
-#include <map>
 #include <vector>
 #include "thread.h"
+#include "recursos_protegidos.h"
 
 class Server{
   private:
     std::string service;
     std::string root_file;
-    Socket aceptador,peer;
+    Socket aceptador;
     std::stringstream petitorio;
-    std::map<std::string,std::string> recursos;
+    Recursos_protegidos recursos;
     ThAceptador thread;
-    std::vector<ThClient> clientes;
+    std::vector<ThClient*> clientes;
 
   public:
     Server(const std::string& service,const std::string& root_file):
     service(service),
     root_file(root_file),
     aceptador(),
-    peer(),
     petitorio(),
-    recursos()
+    recursos(root_file),
+    thread(&this->clientes,&this->aceptador,&recursos)
     //verificar que exista archivo
     {}
     std::string get_contenido_recurso(const std::string& recurso) const;

@@ -2,12 +2,11 @@
 #define __PARSER_H__
 #include <sstream>
 #include "metodo.h"
-#include "server.h"
-
+#include "recursos_protegidos.h"
 
 class Parser {
   public:
-    Metodo* run(Server& servidor, const std::string& buffer);
+    Metodo* run(Recursos_protegidos* recursos, const std::string& buffer);
 };
 
 #endif

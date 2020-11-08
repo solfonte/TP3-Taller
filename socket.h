@@ -22,7 +22,7 @@ class Socket{
     int fd;
   public:
     void bind_and_listen(const char* host,const char* service);
-
+    void cerrar();
     Socket(Socket&& socket);
     ~Socket();
     void aceptar(Socket& peer)const;

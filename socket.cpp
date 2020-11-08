@@ -57,6 +57,9 @@ void Socket::aceptar(Socket& peer)const {
 }
 
 Socket::~Socket(){
+
+}
+void Socket::cerrar(){
   if (this->fd > -1){
     close(this->fd);
   }

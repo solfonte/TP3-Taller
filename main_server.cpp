@@ -28,16 +28,10 @@ int main(int argc, char** argv) {
     std::cout << se.getError() <<"\n";
 
   }
-  //char c;
   server.procesar_request();
-  server.shutdown();
-  /*
+  /*char c;
   while((c = std::cin.get()) != 'q'){
-    if (c != '\n'){
-      //server.enviar();
-      //std::cout << service << " y " << root_file <<"\n";
-    }
-
   }*/
+  server.shutdown();
   return 0;
 }
