@@ -3,19 +3,6 @@
 #include <iostream>
 #include <sstream>
 
-/*
-GetSinRecurso::GetSinRecurso(){
-
-}*/
-
-Metodo::Metodo(){
-
-}
-/*
-GetConRecurso::GetConRecurso(){
-
-}
-*/
 PostSinRecurso::PostSinRecurso(){
 }
 

@@ -5,7 +5,7 @@
 class Metodo{
   public:
     virtual std::string obtener_respuesta() = 0;
-    Metodo();//deberia borrarlo
+    Metodo() {}
     virtual ~Metodo() {}
 };
 

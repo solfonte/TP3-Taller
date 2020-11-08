@@ -7,7 +7,6 @@ std::string generar_contenido_recurso(const std::string& petitorio){
   std::string contenido("");
   if (res >= 0){
     contenido = petitorio.substr(res,petitorio.size()-1);
-    std::cout << contenido << "\n";
   }
   return contenido;
 }
@@ -16,7 +15,6 @@ std::string generar_recurso(const std::string& petitorio){
   int pos_inicial = petitorio.find('/') + 1;
   int pos_final = petitorio.find("HTTP") - 1;
   std::string recurso = petitorio.substr(pos_inicial,pos_final);
-  std::cout << recurso << "\n";
   return recurso;
 }
 

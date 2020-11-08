@@ -4,7 +4,8 @@
 #include <string>
 #include <sstream>
 #include <map>
-
+#include <vector>
+#include "thread.h"
 
 class Server{
   private:
@@ -13,7 +14,8 @@ class Server{
     Socket aceptador,peer;
     std::stringstream petitorio;
     std::map<std::string,std::string> recursos;
-    //Thread thread_aceptador;
+    ThAceptador thread;
+    std::vector<ThClient> clientes;
 
   public:
     Server(const std::string& service,const std::string& root_file):
@@ -28,8 +30,7 @@ class Server{
     std::string get_contenido_recurso(const std::string& recurso) const;
     std::string get_archivo_root();
     void run();
-    void recibir();
-    void enviar();
+    void procesar_request();
     void shutdown();
     void guardar_recurso(std::string& recurso,std::string& contenido);
 };

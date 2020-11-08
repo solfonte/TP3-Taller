@@ -6,7 +6,7 @@
 #include <string>
 #include <unistd.h>
 #include <exception>
-
+#include <sstream>
 
 class SocketException: public std::exception{
   public:
@@ -20,18 +20,15 @@ class SocketException: public std::exception{
 class Socket{
   private:
     int fd;
-    //ver si hace falta guardar el buffer aca creeria que no
   public:
     void bind_and_listen(const char* host,const char* service);
-    //Socket(const int file_descriptor);
-    //Socket(const char* host,const char* service);
-    //Socket(const char* service);
+
     Socket(Socket&& socket);
     ~Socket();
     void aceptar(Socket& peer)const;
     Socket();
     void enviar(const char* buffer, size_t length);
-    ssize_t recibir(char* buffer, size_t tamanio);
+    void recibir(std::stringstream& petitorio);
     void conectar(const char* host,const char* service);
     void cerrar_conexion(int modo);
 };

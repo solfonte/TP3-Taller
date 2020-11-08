@@ -42,7 +42,7 @@ void Socket::bind_and_listen(const char* host,const char* service){
   if (resultado_bind == ERROR){
     throw SocketException("No se pudo realizar el bind del socket\n");
   }
-  int resultado_listen = listen(fd, 10);
+  int resultado_listen = listen(fd,15);
   if (resultado_listen < 0){
     throw SocketException("Fallo el listen del socket\n");
   }
@@ -53,43 +53,38 @@ void Socket::aceptar(Socket& peer)const {
   if (fd < 0){
     throw SocketException("No se pudo aceptar el peer\n");
   }
-  std::cout << "acepte" << "\n";
   peer.fd = fd;
 }
 
 Socket::~Socket(){
   if (this->fd > -1){
     close(this->fd);
-  }//capza shut down
+  }
 }
 
-ssize_t Socket::recibir(char* buffer,size_t length){
-  return recv(this->fd,buffer,length,0);
-}
-/*
-void Socket::recibir(char* buffer){
+void Socket::recibir(std::stringstream& petitorio){
   ssize_t bytes_recv = 0;
   bool termine = false, hubo_error = false;
   char buffer[20];
   size_t length = 20;
   while (!termine && !hubo_error){
-    size_t tam_recv = length - (size_t)bytes_recv;
+    size_t tam_recv = length - (size_t)bytes_recv -1;
     ssize_t resultado_recv = recv(this->fd,buffer,tam_recv,0);
     bytes_recv = resultado_recv;
     if (resultado_recv == -1){
       hubo_error = true;
+        throw SocketException("Fallo el receive");
     }else if (resultado_recv == 0){
       termine = true;
     }else{
-      std::cout << buffer<< "\n";
-      if(resultado_recv < length){
-        buffer[resultado_recv] = '\n';
+      if(resultado_recv < (ssize_t)length){
       }
+      petitorio.write(buffer,resultado_recv);
       bytes_recv = 0;
     }
   }
 }
-*/
+
 void Socket::conectar(const char* host,const char* service){
   bool conecte = false;
   struct addrinfo hints;
