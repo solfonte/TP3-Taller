@@ -1,6 +1,5 @@
 #include "client.h"
 #include <iostream>
-#include <sstream>
 
 void Client::run(){
   const char* host_aux = host.c_str();
@@ -17,4 +16,11 @@ void Client::enviar(){
     }
   }
   this->client.cerrar_conexion(SHUT_WR);
+}
+
+void Client::recibir(){
+  this->client.recibir(this->respuesta);
+  std::string rta = this->respuesta.str();
+  std::cout << rta << "\n";
+  this->client.cerrar_conexion(SHUT_RD);
 }

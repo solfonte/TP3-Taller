@@ -2,13 +2,14 @@
 #define __CLIENT_H__
 #include "socket.h"
 #include <string>
-
+#include <sstream>
 
 class Client{
   private:
     Socket client;
     std::string host;
     std::string service;
+    std::stringstream respuesta;
   public:
     Client(const std::string& host,const std::string& service):
       client(),
@@ -17,6 +18,7 @@ class Client{
       {}
     void enviar();
     void run();
+    void recibir();
 };
 
 #endif
