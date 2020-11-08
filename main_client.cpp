@@ -31,5 +31,6 @@ int main(int argc, char** argv) {
     return 0;
   }
   cliente.enviar();
+  cliente.recibir();
   return 0;
 }

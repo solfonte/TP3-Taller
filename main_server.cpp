@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
 
   }
   //char c;
-  server.recibir();
+  server.procesar_request();
   server.shutdown();
   /*
   while((c = std::cin.get()) != 'q'){
