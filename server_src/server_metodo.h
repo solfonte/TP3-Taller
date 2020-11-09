@@ -50,7 +50,7 @@ class MetodoInvalido: public Metodo{
   private:
   std::string metodo_invalido;
   public:
-    explicit MetodoInvalido(const std::string metodo_invalido):
+    explicit MetodoInvalido(const std::string& metodo_invalido):
      metodo_invalido(metodo_invalido)
      {}
     std::string obtener_respuesta() override;
