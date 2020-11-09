@@ -12,15 +12,17 @@
 class Thread{
   private:
     std::thread thread;
-  public:
-    Thread() {}
+  protected:
     void start();
     virtual void run() = 0;
+  public:
+    Thread() {}
     virtual ~Thread() {}
     void join();
     Thread(Thread&& other);
     Thread& operator=(const Thread&) = delete;
     Thread(const Thread&) = delete;
+    virtual void operator()() = 0;
 };
 
 class ThClient: public Thread{
@@ -41,6 +43,7 @@ class ThClient: public Thread{
     void run() override;
     bool is_dead();
     void stop();
+    void operator()() override;
 };
 
 class ThAceptador: public Thread{
@@ -56,6 +59,7 @@ class ThAceptador: public Thread{
     m(m)
       {}
     void run() override;
+    void operator()() override;
 };
 
 #endif

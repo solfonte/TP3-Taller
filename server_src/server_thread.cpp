@@ -23,6 +23,13 @@ std::string crear_primer_linea(const std::string& petitorio){
   }
   return primer_linea;
 }
+void ThClient::operator()(){
+  this->start();
+}
+
+void ThAceptador::operator()(){
+  this->start();
+}
 
 void ThClient::run(){
   std::stringstream petitorio;
@@ -54,7 +61,8 @@ void ThAceptador::run(){
       this->aceptador->aceptar(peer);
       ThClient* cliente = new ThClient(std::move(peer),this->recursos,this->m);
       this->clientes.push_back(cliente);
-      cliente->start();
+      //cliente->start();
+      (*cliente)();
     }catch(const SocketException& se){
       seguir_aceptando = false;
     }

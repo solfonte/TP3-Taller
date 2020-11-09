@@ -26,7 +26,7 @@ class Server{
     aceptador(),
     petitorio(),
     recursos(root_file,m),
-    thread(/*new ThAceptador(&this->aceptador,&recursos,m)*/),
+    thread(),
     m(m)
     //verificar que exista archivo
     {}

@@ -25,7 +25,8 @@ void Server::run(){
   const char* servicio_aux = this->service.c_str();
   this->aceptador.bind_and_listen(INADDR_ANY,servicio_aux);
   this->thread = new ThAceptador(&this->aceptador,&recursos,this->m);
-  this->thread->start();
+  //this->thread->start();
+  (*this->thread)();
 }
 
 std::string Server::get_contenido_recurso(const std::string& recurso) const{
