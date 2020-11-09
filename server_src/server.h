@@ -1,6 +1,6 @@
 #ifndef __SERVER_H__
 #define __SERVER_H__
-#include "socket.h"
+#include "../common_src/common_socket.h"
 #include <string>
 #include <sstream>
 #include <vector>

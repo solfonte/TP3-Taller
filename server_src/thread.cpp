@@ -46,16 +46,8 @@ void ThClient::stop(){
   this->peer.cerrar();
 }
 
-//capaz juntar shutdown con close
 void ThAceptador::run(){
-/*  Socket peer = Socket();
-  this->aceptador->aceptar(peer);
-  ThClient* cliente = new ThClient(std::move(peer),this->recursos,this->m);
-  this->clientes.push_back(cliente);
-  cliente->start();
-  cliente->join();
-  cliente->stop();
-  delete cliente;*/
+
 
   bool seguir_aceptando = true;
   int cantidad_clientes;
