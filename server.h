@@ -24,7 +24,7 @@ class Server{
     aceptador(),
     petitorio(),
     recursos(root_file),
-    thread(&this->clientes,&this->aceptador,&recursos)
+    thread(ThAceptador(&this->clientes,&this->aceptador,&recursos))
     //verificar que exista archivo
     {}
     std::string get_contenido_recurso(const std::string& recurso) const;

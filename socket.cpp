@@ -50,6 +50,7 @@ void Socket::bind_and_listen(const char* host,const char* service){
 
 void Socket::aceptar(Socket& peer)const {
   int fd = accept(this->fd, NULL, NULL);
+  std::cout << "el fd es: " << fd;
   if (fd < 0){
     throw SocketException("No se pudo aceptar el peer\n");
   }

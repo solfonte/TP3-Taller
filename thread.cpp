@@ -7,7 +7,7 @@ void Thread::start() {
     this->thread = std::thread(&Thread::run,this);
 }
 void Thread::join() {
-    this->thread.join();
+    thread.join();
 }
 
 Thread::Thread(Thread&& other){
@@ -24,6 +24,7 @@ std::string crear_primer_linea(const std::string& petitorio){
 }
 
 void ThClient::run(){
+
   std::stringstream petitorio;
 
   this->peer.recibir(petitorio);
@@ -48,10 +49,8 @@ void ThClient::stop(){
 void ThAceptador::run(){
   Socket peer = Socket();
   this->aceptador->aceptar(peer);
+  std::cout << "entro\n";
   ThClient* cliente = new ThClient(std::move(peer),this->recursos);
   this->clientes->push_back(cliente);
-}
-
-Socket& ThClient::getpeer(){
-  return this->peer;
+  //cliente->start();
 }
