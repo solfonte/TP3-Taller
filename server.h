@@ -14,17 +14,17 @@ class Server{
     Socket aceptador;
     std::stringstream petitorio;
     Recursos_protegidos recursos;
-    ThAceptador thread;
+    ThAceptador* thread;
     std::vector<ThClient*> clientes;
 
   public:
-    Server(const std::string& service,const std::string& root_file):
+    Server(const std::string& service,const std::string& root_file,std::mutex &m):
     service(service),
     root_file(root_file),
     aceptador(),
     petitorio(),
-    recursos(root_file),
-    thread(ThAceptador(&this->clientes,&this->aceptador,&recursos))
+    recursos(root_file,m),
+    thread(new ThAceptador(&this->aceptador,&recursos,m))
     //verificar que exista archivo
     {}
     std::string get_contenido_recurso(const std::string& recurso) const;

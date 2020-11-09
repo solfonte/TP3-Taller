@@ -5,7 +5,7 @@
 #include <atomic>
 #include <vector>
 #include "recursos_protegidos.h"
-
+#include <mutex>
 
 class Thread{
   private:
@@ -27,12 +27,14 @@ class ThClient: public Thread{
     std::atomic<bool> keep_talking;
     std::atomic<bool> is_running;
     Recursos_protegidos* recursos;
-    Socket& get_peer();
+    std::mutex &m;
   public:
-    Socket& getpeer();
-    ThClient(Socket peer,Recursos_protegidos* recursos):
+    ThClient(Socket peer,Recursos_protegidos* recursos,std::mutex &m):
     peer(std::move(peer)),
-    recursos(recursos)
+    keep_talking(true),
+    is_running(true),
+    recursos(recursos),
+    m(m)
       {}
     void run() override;
     void stop();
@@ -41,13 +43,14 @@ class ThClient: public Thread{
 class ThAceptador: public Thread{
   private:
     Socket* aceptador;
-    std::vector<ThClient*>* clientes;//capaz referencia al vector
+    std::vector<ThClient*> clientes;
     Recursos_protegidos* recursos;
+    std::mutex &m;
   public:
-    ThAceptador(std::vector<ThClient*>* clientes,Socket* aceptador,Recursos_protegidos* recursos):
+    ThAceptador(Socket* aceptador,Recursos_protegidos* recursos,std::mutex &m):
     aceptador(aceptador),
-    clientes(clientes),
-    recursos(recursos)
+    recursos(recursos),
+    m(m)
       {}
     void run() override;
 };

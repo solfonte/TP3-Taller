@@ -17,17 +17,18 @@ bool validar_argumentos(int argc, char** argv,std::string &puerto,std::string &r
 
 int main(int argc, char** argv) {
   std::string puerto,root_file;
+  std::mutex m;
   if (!validar_argumentos(argc,argv,puerto,root_file)){
     std::cout << "La cantidad de argumentos es incorrecta\n";
     return 1;
   }
-  Server server = Server(puerto,root_file);
+  Server server = Server(puerto,root_file,m);
   try{
     server.run();
   }catch(const SocketException& se){
     std::cout << se.getError() <<"\n";
   }
-  server.procesar_request();
+  //server.procesar_request();
   /*char c;
   while((c = std::cin.get()) != 'q'){
   }*/

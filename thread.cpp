@@ -24,9 +24,7 @@ std::string crear_primer_linea(const std::string& petitorio){
 }
 
 void ThClient::run(){
-
   std::stringstream petitorio;
-
   this->peer.recibir(petitorio);
   this->peer.cerrar_conexion(SHUT_RD);
   std::string primer_linea_petitorio = crear_primer_linea(petitorio.str());
@@ -49,8 +47,10 @@ void ThClient::stop(){
 void ThAceptador::run(){
   Socket peer = Socket();
   this->aceptador->aceptar(peer);
-  std::cout << "entro\n";
-  ThClient* cliente = new ThClient(std::move(peer),this->recursos);
-  this->clientes->push_back(cliente);
-  //cliente->start();
+  ThClient* cliente = new ThClient(std::move(peer),this->recursos,this->m);
+  this->clientes.push_back(cliente);
+  cliente->start();
+  //cliente->stop();
+  cliente->join();
+  delete cliente;
 }
