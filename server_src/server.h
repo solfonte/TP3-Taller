@@ -16,7 +16,7 @@ class Server{
     Recursos_protegidos recursos;
     ThAceptador* thread;
     std::vector<ThClient*> clientes;
-
+    std::mutex& m;
   public:
     Server(const std::string& service,
           const std::string& root_file,std::mutex &m):
@@ -25,7 +25,8 @@ class Server{
     aceptador(),
     petitorio(),
     recursos(root_file,m),
-    thread(new ThAceptador(&this->aceptador,&recursos,m))
+    thread(/*new ThAceptador(&this->aceptador,&recursos,m)*/),
+    m(m)
     //verificar que exista archivo
     {}
     std::string get_contenido_recurso(const std::string& recurso) const;
@@ -34,6 +35,7 @@ class Server{
     void procesar_request();
     void shutdown();
     void guardar_recurso(const std::string& recurso,const std::string& contenido);
+    //Server& operator=(Server&& other);
 };
 
 #endif
