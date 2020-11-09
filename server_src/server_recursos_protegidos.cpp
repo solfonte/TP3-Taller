@@ -11,11 +11,11 @@ std::string Recursos_protegidos::get_contenido_recurso
 }
 void Recursos_protegidos::guardar_recurso(const std::string& recurso,const
                           std::string& contenido){
-  Lock(this->m);
+  Lock lock(this->m);
     this->recursos[recurso] = contenido;
 }
 
 std::string& Recursos_protegidos::get_archivo_root(){
-  Lock(this->m);
+  Lock lock(this->m);
   return this->root_file;
 }
