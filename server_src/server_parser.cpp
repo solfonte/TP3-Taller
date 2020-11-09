@@ -42,7 +42,6 @@ Metodo* parsear_metodo_get(Recursos_protegidos* recursos,
 
 Metodo* parsear_metodo_post(Recursos_protegidos* recursos,
                             const std::string& petitorio){
-
   int res = petitorio.find("/ HTTP");
   if (res >= 0){
     return new PostSinRecurso();
