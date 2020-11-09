@@ -16,8 +16,8 @@ class Recursos_protegidos{
       m(m)
       {}
     std::string get_contenido_recurso(const std::string& recurso) const;
-    void guardar_recurso(std::string& recurso,std::string& contenido);
-    std::string get_archivo_root();
+    void guardar_recurso(const std::string& recurso,const std::string& contenido);
+    std::string& get_archivo_root();
 };
 
 #endif

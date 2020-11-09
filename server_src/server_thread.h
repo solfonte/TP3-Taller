@@ -1,10 +1,10 @@
 #ifndef __THREAD_H__
 #define __THREAD_H__
 #include <thread>
-#include "socket.h"
+#include "../common_src/common_socket.h"
 #include <atomic>
 #include <vector>
-#include "recursos_protegidos.h"
+#include "server_recursos_protegidos.h"
 #include <mutex>
 #include <utility>
 #include <string>

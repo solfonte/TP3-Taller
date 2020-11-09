@@ -4,8 +4,8 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include "thread.h"
-#include "recursos_protegidos.h"
+#include "server_thread.h"
+#include "server_recursos_protegidos.h"
 
 class Server{
   private:
@@ -33,7 +33,7 @@ class Server{
     void run();
     void procesar_request();
     void shutdown();
-    void guardar_recurso(std::string& recurso,std::string& contenido);
+    void guardar_recurso(const std::string& recurso,const std::string& contenido);
 };
 
 #endif

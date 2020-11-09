@@ -1,6 +1,6 @@
 #include "server.h"
-#include "parser.h"
-#include "metodo.h"
+#include "server_parser.h"
+#include "server_metodo.h"
 #include <iostream>
 
 void Server::shutdown(){
@@ -24,6 +24,6 @@ std::string Server::get_archivo_root(){
   return this->root_file;
 }
 
-void Server::guardar_recurso(std::string& recurso,std::string& contenido){
+void Server::guardar_recurso(const std::string& recurso,const std::string& contenido){
   this->recursos.guardar_recurso(recurso,contenido);
 }

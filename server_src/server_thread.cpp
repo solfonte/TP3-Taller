@@ -1,8 +1,8 @@
-#include "thread.h"
-#include "metodo.h"
+#include "server_thread.h"
+#include "server_metodo.h"
 #include <iostream>
-#include "parser.h"
-#include "lock.h"
+#include "server_parser.h"
+#include "server_lock.h"
 
 void Thread::start() {
     this->thread = std::thread(&Thread::run,this);

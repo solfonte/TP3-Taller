@@ -1,5 +1,5 @@
-#include "recursos_protegidos.h"
-#include "lock.h"
+#include "server_recursos_protegidos.h"
+#include "server_lock.h"
 
 std::string Recursos_protegidos::get_contenido_recurso
                     (const std::string& recurso) const{
@@ -15,8 +15,7 @@ void Recursos_protegidos::guardar_recurso(const std::string& recurso,const
     this->recursos[recurso] = contenido;
 }
 
-std::string Recursos_protegidos::get_archivo_root(){
+std::string& Recursos_protegidos::get_archivo_root(){
   Lock(this->m);
-  std::string root = this->root_file;
-  return root;
+  return this->root_file;
 }
