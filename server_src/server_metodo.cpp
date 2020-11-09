@@ -40,6 +40,6 @@ std::string PostConRecurso::obtener_respuesta(){
 
 std::string MetodoInvalido::obtener_respuesta(){
   std::string respuesta = "HTTP/1.1 405 METHOD NOT ALLOWED\n\n" +
-                          this->metodo_invalido + "es un comando desconocido";
+                          this->metodo_invalido + "es un comando desconocido\n";
   return respuesta;
 }

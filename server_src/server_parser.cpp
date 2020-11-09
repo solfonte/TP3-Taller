@@ -12,10 +12,11 @@ std::string generar_metodo_invalido(const std::string& petitorio){
 }
 
 std::string generar_contenido_recurso(const std::string& petitorio){
-  int res = petitorio.find("<");
+  int inicio = petitorio.find("<");
+  int fin = petitorio.find_last_of(">") - 1;
   std::string contenido("");
-  if (res >= 0){
-    contenido = petitorio.substr(res,petitorio.size()-1);
+  if (inicio >= 0 && fin >= 0){
+    contenido = petitorio.substr(inicio,fin);
   }
   return contenido;
 }
@@ -49,7 +50,6 @@ Metodo* parsear_metodo_post(Recursos_protegidos* recursos,
     std::string recurso = generar_recurso(petitorio);
     std::string contenido = generar_contenido_recurso(petitorio);
     recursos->guardar_recurso(recurso,contenido);
-
     return new PostConRecurso(contenido);
   }
 }
