@@ -2,8 +2,17 @@
 #include <iostream>
 #include <string>
 
+std::string generar_metodo_invalido(const std::string& petitorio){
+  int res = petitorio.find("/");
+  std::string contenido("");
+  if (res >= 0){
+    contenido = petitorio.substr(0,res);
+  }
+  return contenido;
+}
+
 std::string generar_contenido_recurso(const std::string& petitorio){
-  int res = petitorio.find("\n\n");
+  int res = petitorio.find("<");
   std::string contenido("");
   if (res >= 0){
     contenido = petitorio.substr(res,petitorio.size()-1);
@@ -33,6 +42,7 @@ Metodo* parsear_metodo_get(Recursos_protegidos* recursos,
 
 Metodo* parsear_metodo_post(Recursos_protegidos* recursos,
                             const std::string& petitorio){
+
   int res = petitorio.find("/ HTTP");
   if (res >= 0){
     return new PostSinRecurso();
@@ -40,6 +50,7 @@ Metodo* parsear_metodo_post(Recursos_protegidos* recursos,
     std::string recurso = generar_recurso(petitorio);
     std::string contenido = generar_contenido_recurso(petitorio);
     recursos->guardar_recurso(recurso,contenido);
+
     return new PostConRecurso(contenido);
   }
 }
@@ -53,6 +64,7 @@ Metodo* Parser::run(Recursos_protegidos* recursos,
   }else if (res_post >= 0){
     return parsear_metodo_post(recursos,petitorio);
   }else{
-    return new MetodoInvalido();
+    std::string metodo = generar_metodo_invalido(petitorio);
+    return new MetodoInvalido(metodo);
   }
 }

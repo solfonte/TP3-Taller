@@ -6,9 +6,6 @@
 PostSinRecurso::PostSinRecurso(){
 }
 
-MetodoInvalido::MetodoInvalido(){
-}
-
 std::string GetSinRecurso::obtener_respuesta(){
   std::string respuesta = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
   std::ifstream fs;
@@ -42,6 +39,7 @@ std::string PostConRecurso::obtener_respuesta(){
 }
 
 std::string MetodoInvalido::obtener_respuesta(){
-  std::string respuesta = "HTTP/1.1 405 METHOD NOT ALLOWED\n\n";
+  std::string respuesta = "HTTP/1.1 405 METHOD NOT ALLOWED\n\n" +
+                          this->metodo_invalido + "es un comando desconocido";
   return respuesta;
 }

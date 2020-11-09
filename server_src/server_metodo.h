@@ -47,8 +47,12 @@ class PostConRecurso: public Metodo{
 };
 
 class MetodoInvalido: public Metodo{
+  private:
+  std::string metodo_invalido;
   public:
-    MetodoInvalido();
+    MetodoInvalido(const std::string metodo_invalido):
+     metodo_invalido(metodo_invalido)
+     {}
     std::string obtener_respuesta() override;
 };
 
