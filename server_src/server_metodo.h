@@ -41,7 +41,7 @@ class PostConRecurso: public Metodo{
   private:
     std::string body;
   public:
-    PostConRecurso(const std::string& body): body(body)
+    explicit PostConRecurso(const std::string& body): body(body)
     {}
      std::string obtener_respuesta() override;
 };
