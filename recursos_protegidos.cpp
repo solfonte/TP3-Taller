@@ -9,9 +9,16 @@ std::string Recursos_protegidos::get_contenido_recurso(const std::string& recurs
 
 }
 void Recursos_protegidos::guardar_recurso(std::string& recurso,std::string& contenido){
+  this->m.lock();
     this->recursos[recurso] = contenido;
+  this->m.unlock();
+
 }
 
 std::string Recursos_protegidos::get_archivo_root(){
-  return this->root_file;
+  //deberia hacer la clase con lock
+  this->m.lock();
+  std::string root = this->root_file;
+  this->m.unlock();
+  return root;
 }

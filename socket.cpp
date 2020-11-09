@@ -135,5 +135,7 @@ void Socket::enviar(const char* buffer, size_t length){
 }
 
 void Socket::cerrar_conexion(int modo){
-  shutdown(this->fd,modo);
+  if (this->fd > -1){
+    shutdown(this->fd,modo);
+  }
 }

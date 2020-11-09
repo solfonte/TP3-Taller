@@ -50,7 +50,7 @@ void ThAceptador::run(){
   ThClient* cliente = new ThClient(std::move(peer),this->recursos,this->m);
   this->clientes.push_back(cliente);
   cliente->start();
-  //cliente->stop();
   cliente->join();
+  cliente->stop();
   delete cliente;
 }

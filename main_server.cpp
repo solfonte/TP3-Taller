@@ -28,10 +28,9 @@ int main(int argc, char** argv) {
   }catch(const SocketException& se){
     std::cout << se.getError() <<"\n";
   }
-  //server.procesar_request();
-  /*char c;
+  char c;
   while((c = std::cin.get()) != 'q'){
-  }*/
+  }
   server.shutdown();
   //aceptador.join, capaz adentro del server shutdown
   return 0;
