@@ -36,6 +36,7 @@ std::string Server::get_archivo_root(){
   return this->root_file;
 }
 
-void Server::guardar_recurso(const std::string& recurso,const std::string& contenido){
+void Server::guardar_recurso(const std::string& recurso,
+                            const std::string& contenido){
   this->recursos.guardar_recurso(recurso,contenido);
 }

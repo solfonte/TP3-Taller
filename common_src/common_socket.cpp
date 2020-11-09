@@ -80,7 +80,7 @@ void Socket::recibir(std::stringstream& petitorio){
     }else if (resultado_recv == 0){
       termine = true;
     }else{
-      if(resultado_recv < (ssize_t)length){
+      if (resultado_recv < (ssize_t)length){
       }
       petitorio.write(buffer,resultado_recv);
       bytes_recv = 0;

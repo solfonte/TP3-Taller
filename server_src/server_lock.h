@@ -7,12 +7,8 @@ class Lock{
   private:
     std::mutex& m;
   public:
-    explicit Lock(std::mutex& m): m(m){
-      m.lock();
-    }
-    ~Lock(){
-      m.unlock();
-    }
+    explicit Lock(std::mutex& m);
+    ~Lock();
 };
 
 #endif

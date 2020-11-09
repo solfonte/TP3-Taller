@@ -34,7 +34,8 @@ class Server{
     void run();
     void procesar_request();
     void shutdown();
-    void guardar_recurso(const std::string& recurso,const std::string& contenido);
+    void guardar_recurso(const std::string& recurso,
+                          const std::string& contenido);
     //Server& operator=(Server&& other);
 };
 
