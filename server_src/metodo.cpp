@@ -7,11 +7,9 @@ PostSinRecurso::PostSinRecurso(){
 }
 
 PostConRecurso::PostConRecurso(){
-
 }
 
 MetodoInvalido::MetodoInvalido(){
-
 }
 
 std::string GetSinRecurso::obtener_respuesta(){

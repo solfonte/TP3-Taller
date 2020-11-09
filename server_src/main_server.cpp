@@ -5,7 +5,8 @@
 #include "server.h"
 #include <iostream>
 
-bool validar_argumentos(int argc, char** argv,std::string &puerto,std::string &root_file){
+bool validar_argumentos(int argc, char** argv,std::string &puerto,
+                        std::string &root_file){
   if (argc != CANTIDAD_ARGUMENTOS_SERVER){
     return false;
   }else{

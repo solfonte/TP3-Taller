@@ -7,7 +7,8 @@
 #include "client.h"
 
 //ccodigo repe
-bool validar_argumentos(int argc, char** argv,std::string &host,std::string &service){
+bool validar_argumentos(int argc, char** argv,std::string &host,
+                        std::string &service){
   if (argc != CANTIDAD_ARGUMENTOS_CLIENT){
     return false;
   }else{

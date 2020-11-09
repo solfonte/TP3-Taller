@@ -30,14 +30,16 @@ void Socket::bind_and_listen(const char* host,const char* service){
     throw SocketException("Fallo la obtencion de conexiones\n");//esta bien??
   }
   //capaz iterar
-  int fd = socket(resultados->ai_family, resultados->ai_socktype, resultados->ai_protocol);
+  int fd = socket(resultados->ai_family, resultados->ai_socktype,
+                  resultados->ai_protocol);
   if (fd < 0){
     freeaddrinfo(resultados);
     throw SocketException("Fallo la creacion del socket\n");
   }
   this->fd = fd;
   setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
-  int resultado_bind =  bind(this->fd, resultados->ai_addr,resultados->ai_addrlen);
+  int resultado_bind =  bind(this->fd, resultados->ai_addr,
+                          resultados->ai_addrlen);
   freeaddrinfo(resultados);
   if (resultado_bind == ERROR){
     throw SocketException("No se pudo realizar el bind del socket\n");
@@ -57,7 +59,6 @@ void Socket::aceptar(Socket& peer)const {
 }
 
 Socket::~Socket(){
-
 }
 void Socket::cerrar(){
   if (this->fd > -1){
@@ -96,9 +97,10 @@ void Socket::conectar(const char* host,const char* service){
     throw SocketException("No se pudo obtener resultados\n");
   }
   ptr = resultados;
-  int res_connect = 0;
+  int res_connect;
   while (ptr != NULL && !conecte){
-    int fd = socket(resultados->ai_family, resultados->ai_socktype, resultados->ai_protocol);
+    int fd = socket(resultados->ai_family, resultados->ai_socktype,
+                    resultados->ai_protocol);
     this->fd = fd;
     if (fd != ERROR){
       res_connect = connect(fd,ptr->ai_addr,ptr->ai_addrlen);
@@ -109,20 +111,19 @@ void Socket::conectar(const char* host,const char* service){
     ptr = ptr->ai_next;
   }
   freeaddrinfo(resultados);
-  if(!conecte){
+  if (!conecte){
     throw SocketException("Fallo la conexion del socket\n");
   }
 }
 
 void Socket::enviar(const char* buffer, size_t length){
-  bool hubo_un_error = false, termine = false;
+  bool termine = false;
   ssize_t bytes_env = 0;
-  while (!hubo_un_error && !termine){
+  while (!termine){
     size_t tam_enviar = length - (size_t)bytes_env;
     ssize_t res_env = send(this->fd,&buffer[bytes_env],
                       tam_enviar,MSG_NOSIGNAL);
     if (res_env == ERROR){
-      //hubo_un_error = true;
       throw SocketException("Hubo un error al enviar\n");
     }else if (res_env == 0){
       termine = true;

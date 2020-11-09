@@ -13,7 +13,7 @@ class Thread{
   private:
     std::thread thread;
   public:
-    Thread () {}
+    Thread() {}
     void start();
     virtual void run() = 0;
     virtual ~Thread() {}

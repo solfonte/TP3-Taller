@@ -13,7 +13,7 @@ class GetSinRecurso: public Metodo{
   private:
     std::string archivo;
   public:
-    GetSinRecurso(std::string archivo):
+    explicit GetSinRecurso(std::string& archivo):
     archivo(archivo)
     {}
      std::string obtener_respuesta() override;
@@ -24,7 +24,7 @@ class GetConRecurso: public Metodo{
     bool recurso_existe;
     std::string contenido_recurso;
   public:
-    GetConRecurso(bool recurso_existe,std::string contenido):
+    GetConRecurso(bool recurso_existe,const std::string contenido):
       recurso_existe(recurso_existe),
       contenido_recurso(contenido)
       {}

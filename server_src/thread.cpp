@@ -25,7 +25,6 @@ std::string crear_primer_linea(const std::string& petitorio){
 }
 
 void ThClient::run(){
-  //Lock(&this->m);
   std::stringstream petitorio;
   this->peer.recibir(petitorio);
   this->peer.cerrar_conexion(SHUT_RD);
@@ -47,11 +46,9 @@ void ThClient::stop(){
 }
 
 void ThAceptador::run(){
-
-
   bool seguir_aceptando = true;
-  int cantidad_clientes;
   while (seguir_aceptando){
+    int cantidad_clientes;
     Socket peer = Socket();
     try{
       this->aceptador->aceptar(peer);
@@ -82,5 +79,4 @@ void ThAceptador::run(){
 }
 bool ThClient::is_dead(){
   return !this->is_running;
-
 }
