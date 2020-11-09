@@ -6,9 +6,6 @@
 PostSinRecurso::PostSinRecurso(){
 }
 
-PostConRecurso::PostConRecurso(){
-}
-
 MetodoInvalido::MetodoInvalido(){
 }
 
@@ -27,7 +24,7 @@ std::string GetSinRecurso::obtener_respuesta(){
 std::string GetConRecurso::obtener_respuesta(){
   std::string respuesta;
   if (this->recurso_existe){
-    respuesta = "HTTP 200 OK \n\n" + this->contenido_recurso;
+    respuesta = "HTTP 1.1 200 OK \n\n" + this->contenido_recurso;
   }else{
     respuesta = "HTTP 404 NOT FOUND\n\n";
   }
@@ -40,7 +37,7 @@ std::string PostSinRecurso::obtener_respuesta(){
 }
 
 std::string PostConRecurso::obtener_respuesta(){
-  std::string respuesta = "";
+  std::string respuesta = "HTTP 1.1 200 OK \n\n" + this->body;
   return respuesta;
 }
 

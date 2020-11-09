@@ -40,7 +40,7 @@ Metodo* parsear_metodo_post(Recursos_protegidos* recursos,
     std::string recurso = generar_recurso(petitorio);
     std::string contenido = generar_contenido_recurso(petitorio);
     recursos->guardar_recurso(recurso,contenido);
-    return new PostConRecurso();
+    return new PostConRecurso(contenido);
   }
 }
 

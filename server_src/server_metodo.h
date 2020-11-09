@@ -38,8 +38,11 @@ class PostSinRecurso: public Metodo{
 };
 
 class PostConRecurso: public Metodo{
+  private:
+    std::string body;
   public:
-    PostConRecurso();
+    PostConRecurso(const std::string& body): body(body)
+    {}
      std::string obtener_respuesta() override;
 };
 
