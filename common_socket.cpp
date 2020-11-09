@@ -67,15 +67,14 @@ void Socket::cerrar(){
 
 void Socket::recibir(std::stringstream& petitorio){
   ssize_t bytes_recv = 0;
-  bool termine = false, hubo_error = false;
+  bool termine = false;
   char buffer[20];
   size_t length = 20;
-  while (!termine && !hubo_error){
+  while (!termine){
     size_t tam_recv = length - (size_t)bytes_recv -1;
     ssize_t resultado_recv = recv(this->fd,buffer,tam_recv,0);
     bytes_recv = resultado_recv;
     if (resultado_recv == -1){
-      hubo_error = true;
         throw SocketException("Fallo el receive");
     }else if (resultado_recv == 0){
       termine = true;

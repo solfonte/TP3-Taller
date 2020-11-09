@@ -11,7 +11,7 @@
 class SocketException: public std::exception{
   public:
     std::string error;
-    SocketException(const std::string& error):
+    explicit SocketException(const std::string& error):
     error(error)
     {}
     const std::string getError() const { return this->error;}
