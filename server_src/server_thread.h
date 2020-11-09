@@ -32,6 +32,8 @@ class ThClient: public Thread{
     std::atomic<bool> is_running;
     Recursos_protegidos* recursos;
     std::mutex &m;
+    void run() override;
+
   public:
     ThClient(Socket peer,Recursos_protegidos* recursos,std::mutex &m):
     peer(std::move(peer)),
@@ -40,7 +42,6 @@ class ThClient: public Thread{
     recursos(recursos),
     m(m)
       {}
-    void run() override;
     bool is_dead();
     void stop();
     void operator()() override;
@@ -52,13 +53,14 @@ class ThAceptador: public Thread{
     std::vector<ThClient*> clientes;
     Recursos_protegidos* recursos;
     std::mutex &m;
+    void run() override;
+
   public:
     ThAceptador(Socket* aceptador,Recursos_protegidos* recursos,std::mutex &m):
     aceptador(aceptador),
     recursos(recursos),
     m(m)
       {}
-    void run() override;
     void operator()() override;
 };
 
