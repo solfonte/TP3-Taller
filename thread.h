@@ -37,6 +37,7 @@ class ThClient: public Thread{
     m(m)
       {}
     void run() override;
+    bool is_dead();
     void stop();
 };
 
