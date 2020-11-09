@@ -19,7 +19,7 @@ std::string GetSinRecurso::obtener_respuesta(){
   std::ifstream fs;
   fs.open(this->archivo);
   std::string contenido;
-  while(getline(fs,contenido,'\n')){
+  while (getline(fs,contenido,'\n')){
     respuesta += contenido;
   }
   fs.close();

@@ -6,6 +6,8 @@
 #include <vector>
 #include "recursos_protegidos.h"
 #include <mutex>
+#include <utility>
+#include <string>
 
 class Thread{
   private:

@@ -6,7 +6,7 @@
 #include <iostream>
 
 bool validar_argumentos(int argc, char** argv,std::string &puerto,std::string &root_file){
-  if(argc != CANTIDAD_ARGUMENTOS_SERVER){
+  if (argc != CANTIDAD_ARGUMENTOS_SERVER){
     return false;
   }else{
     puerto = argv[POSICION_SERVICE];
@@ -29,7 +29,7 @@ int main(int argc, char** argv) {
     std::cout << se.getError() <<"\n";
   }
   char c;
-  while((c = std::cin.get()) != 'q'){
+  while ((c = std::cin.get()) != 'q'){
   }
   server.shutdown();
   //aceptador.join, capaz adentro del server shutdown

@@ -3,6 +3,7 @@
 #include <sstream>
 #include "metodo.h"
 #include "recursos_protegidos.h"
+#include <string>
 
 class Parser {
   public:

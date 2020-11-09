@@ -32,7 +32,7 @@ Metodo* parsear_metodo_get(Recursos_protegidos* recursos,const std::string& peti
 
 Metodo* parsear_metodo_post(Recursos_protegidos* recursos,const std::string& petitorio){
   int res = petitorio.find("/ HTTP");
-  if(res >= 0){
+  if (res >= 0){
     return new PostSinRecurso();
   }else{
     std::string recurso = generar_recurso(petitorio);
@@ -45,9 +45,9 @@ Metodo* parsear_metodo_post(Recursos_protegidos* recursos,const std::string& pet
 Metodo* Parser::run(Recursos_protegidos* recursos, const std::string& petitorio){
   int res_get = petitorio.find("GET");
   int res_post = petitorio.find("POST");
-  if(res_get >= 0){
+  if (res_get >= 0){
     return parsear_metodo_get(recursos,petitorio);
-  }else if(res_post >= 0){
+  }else if (res_post >= 0){
     return parsear_metodo_post(recursos,petitorio);
   }else{
     return new MetodoInvalido();
