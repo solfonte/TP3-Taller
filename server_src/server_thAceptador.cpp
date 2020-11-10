@@ -33,7 +33,7 @@ void ThAceptador::run(){
     Socket peer = Socket();
     try{
       this->aceptador.aceptar(peer);
-      ThClient* cliente = new ThClient(std::move(peer),this->recursos,this->m);
+      ThClient* cliente = new ThClient(std::move(peer),this->recursos);
       this->clientes.push_back(cliente);
       (*cliente)();
     }catch(const SocketException& se){
