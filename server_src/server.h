@@ -4,7 +4,8 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include "server_thread.h"
+#include "server_thAceptador.h"
+#include "server_thClient.h"
 #include "server_recursos_protegidos.h"
 
 class Server{
@@ -15,7 +16,6 @@ class Server{
     std::stringstream petitorio;
     Recursos_protegidos recursos;
     ThAceptador* thread;
-    std::vector<ThClient*> clientes;
     std::mutex& m;
 
   public:

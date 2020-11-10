@@ -2,7 +2,6 @@
 #define __THCLIENT_H__
 #include "server_thread.h"
 
-
 class ThClient: public Thread{
   private:
     Socket peer;

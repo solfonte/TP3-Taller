@@ -1,6 +1,7 @@
 #ifndef __THACEPTADOR_H__
 #define __THACEPTADOR_H__
 #include "server_thread.h"
+#include "server_thClient.h"
 
 class ThAceptador: public Thread{
   private:
