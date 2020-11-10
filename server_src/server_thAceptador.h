@@ -7,14 +7,14 @@
 
 class ThAceptador: public Thread{
   private:
-    Socket* aceptador;
+    Socket& aceptador;
     std::vector<ThClient*> clientes;
     Recursos_protegidos& recursos;
     std::mutex &m;
     void run() override;
 
   public:
-    ThAceptador(Socket* aceptador,Recursos_protegidos& recursos,std::mutex &m):
+    ThAceptador(Socket& aceptador,Recursos_protegidos& recursos,std::mutex &m):
     aceptador(aceptador),
     recursos(recursos),
     m(m)
