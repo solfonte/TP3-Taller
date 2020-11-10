@@ -13,7 +13,6 @@ class Server{
     std::string service;
     std::string root_file;
     Socket aceptador;
-    std::stringstream petitorio;
     Recursos_protegidos recursos;
     ThAceptador* thread;
 

@@ -12,4 +12,5 @@ Esta clase fue implementada con el fin de encapsular todos los datos accedidos e
 -Cuando se recibe un GET/ sin recurso, si el archivo root no puede ser abierto por el programa, se muestra un mensaje de error para no cortar el flujo del programa.  
 
 **Diagrama de clases**  
-![Alt Text](clasestp3.png)  
+![Alt Text](clasestp3.png)
+![Alt Text](clasestp33.png)

@@ -8,7 +8,7 @@
 Server::Server(const std::string& service,
               const std::string& root_file):
       service(service), root_file(root_file),
-      aceptador(), petitorio(),
+      aceptador(),
       recursos(root_file),thread(){}
 
 void Server::shutdown(){
