@@ -53,10 +53,33 @@ void ThClient::stop(){
   this->peer.cerrar();
 }
 
+void ThAceptador::remover_hilos_finalizados(){
+  int cantidad_clientes = this->clientes.size();
+  for (int i = 0; i < cantidad_clientes; i++){
+    if (this->clientes[i]->is_dead()){
+      this->clientes[i]->join();
+      delete this->clientes[i];
+      this->clientes.erase(this->clientes.begin() + i);
+      cantidad_clientes --;
+    }
+  }
+}
+
+void ThAceptador::detener_clientes(){
+  int cantidad_clientes = this->clientes.size();
+  for (int i = 0; i < cantidad_clientes; i++){
+    this->clientes[i]->join();
+    this->clientes[i]->stop();
+    delete this->clientes[i];
+    this->clientes.erase(this->clientes.begin() + i);
+    cantidad_clientes --;
+  }
+}
+
 void ThAceptador::run(){
   bool seguir_aceptando = true;
   while (seguir_aceptando){
-    int cantidad_clientes;
+    //int cantidad_clientes;
     Socket peer = Socket();
     try{
       this->aceptador->aceptar(peer);
@@ -66,23 +89,8 @@ void ThAceptador::run(){
     }catch(const SocketException& se){
       seguir_aceptando = false;
     }
-    cantidad_clientes = this->clientes.size();
-    for (int i = 0; i < cantidad_clientes; i++){
-      if (this->clientes[i]->is_dead()){
-        this->clientes[i]->join();
-        delete this->clientes[i];
-        this->clientes.erase(this->clientes.begin() + i);
-        cantidad_clientes --;
-      }
-    }
-    cantidad_clientes = this->clientes.size();
-    for (int i = 0; i < cantidad_clientes; i++){
-      this->clientes[i]->join();
-      this->clientes[i]->stop();
-      delete this->clientes[i];
-      this->clientes.erase(this->clientes.begin() + i);
-      cantidad_clientes --;
-    }//apasa r a funcioens
+    this->remover_hilos_finalizados();
+    this->detener_clientes();
   }
 }
 bool ThClient::is_dead(){

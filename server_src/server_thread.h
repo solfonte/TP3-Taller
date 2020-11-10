@@ -62,6 +62,8 @@ class ThAceptador: public Thread{
     m(m)
       {}
     void operator()() override;
+    void remover_hilos_finalizados();
+    void detener_clientes();  
 };
 
 #endif
