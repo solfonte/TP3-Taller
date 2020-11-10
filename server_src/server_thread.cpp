@@ -90,8 +90,8 @@ void ThAceptador::run(){
       seguir_aceptando = false;
     }
     this->remover_hilos_finalizados();
-    this->detener_clientes();
   }
+  this->detener_clientes();
 }
 bool ThClient::is_dead(){
   return !this->is_running;
