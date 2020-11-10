@@ -18,12 +18,11 @@ static bool validar_argumentos(int argc, char** argv,std::string &puerto,
 
 int main(int argc, char** argv) {
   std::string puerto,root_file;
-  std::mutex m;
   if (!validar_argumentos(argc,argv,puerto,root_file)){
     std::cout << "La cantidad de argumentos es incorrecta\n";
     return 1;
   }
-  Server server = Server(puerto,root_file,m);
+  Server server = Server(puerto,root_file);
   try{
     server.run();
   }catch(const SocketException& se){

@@ -6,10 +6,10 @@
 
 
 Server::Server(const std::string& service,
-      const std::string& root_file,std::mutex &m):
+              const std::string& root_file):
       service(service), root_file(root_file),
       aceptador(), petitorio(),
-      recursos(root_file,m),thread(), m(m){}
+      recursos(root_file),thread(){}
 
 void Server::shutdown(){
   this->aceptador.cerrar_conexion(SHUT_RD);
@@ -21,7 +21,7 @@ void Server::shutdown(){
 void Server::run(){
   const char* servicio_aux = this->service.c_str();
   this->aceptador.bind_and_listen(INADDR_ANY,servicio_aux);
-  this->thread = new ThAceptador(this->aceptador,recursos,this->m);
+  this->thread = new ThAceptador(this->aceptador,recursos);
   (*this->thread)();
 }
 

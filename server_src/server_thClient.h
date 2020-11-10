@@ -10,7 +10,6 @@ class ThClient: public Thread{
     std::atomic<bool> keep_talking;
     std::atomic<bool> is_running;
     Recursos_protegidos& recursos;
-    std::mutex &m;
     void run() override;
 
   public:
@@ -18,8 +17,7 @@ class ThClient: public Thread{
     peer(std::move(peer)),
     keep_talking(true),
     is_running(true),
-    recursos(recursos),
-    m(m)
+    recursos(recursos)
       {}
     bool is_dead();
     void stop();

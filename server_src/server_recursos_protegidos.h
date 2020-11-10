@@ -9,11 +9,11 @@ class Recursos_protegidos{
   private:
     std::string root_file;
     std::map<std::string,std::string> recursos;
-    std::mutex &m;
+    std::mutex m;
   public:
-    Recursos_protegidos(const std::string& root_file,std::mutex &m):
+    Recursos_protegidos(const std::string& root_file):
       root_file(root_file),
-      m(m)
+      m()
       {}
     Recursos_protegidos(Recursos_protegidos&& other);
     std::string get_contenido_recurso(const std::string& recurso) const;

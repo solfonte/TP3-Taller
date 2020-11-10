@@ -10,14 +10,12 @@ class ThAceptador: public Thread{
     Socket& aceptador;
     std::vector<ThClient*> clientes;
     Recursos_protegidos& recursos;
-    std::mutex &m;
     void run() override;
 
   public:
-    ThAceptador(Socket& aceptador,Recursos_protegidos& recursos,std::mutex &m):
+    ThAceptador(Socket& aceptador,Recursos_protegidos& recursos):
     aceptador(aceptador),
-    recursos(recursos),
-    m(m)
+    recursos(recursos)
       {}
     void operator()() override;
     void remover_hilos_finalizados();
