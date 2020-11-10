@@ -1,6 +1,8 @@
 #ifndef __THCLIENT_H__
 #define __THCLIENT_H__
 #include "server_thread.h"
+#include <utility>
+#include <string>
 
 class ThClient: public Thread{
   private:
