@@ -31,7 +31,7 @@ static Metodo* parsear_metodo_get(Recursos_protegidos& recursos,
                             const std::string& petitorio){
   int res = petitorio.find("/ HTTP");
   if (res >= 0){
-    return new GetSinRecurso(recursos.get_archivo_root());
+    return new GetSinRecurso(recursos.get_contenido_archivo_root());
   }else{
     std::string recurso = generar_recurso(petitorio);
     std::string contenido = recursos.get_contenido_recurso(recurso);

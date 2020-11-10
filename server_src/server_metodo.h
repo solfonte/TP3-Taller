@@ -11,10 +11,10 @@ class Metodo{
 
 class GetSinRecurso: public Metodo{
   private:
-    std::string archivo;
+    std::string contenido;
   public:
     explicit GetSinRecurso(const std::string& archivo):
-    archivo(archivo)
+    contenido(archivo)
     {}
      std::string obtener_respuesta() override;
 };
