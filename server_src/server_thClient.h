@@ -13,7 +13,7 @@ class ThClient: public Thread{
     void run() override;
 
   public:
-    ThClient(Socket peer,Recursos_protegidos& recursos,std::mutex &m):
+    ThClient(Socket peer,Recursos_protegidos& recursos):
     peer(std::move(peer)),
     keep_talking(true),
     is_running(true),

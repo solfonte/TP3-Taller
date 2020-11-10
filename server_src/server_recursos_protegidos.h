@@ -11,7 +11,7 @@ class Recursos_protegidos{
     std::map<std::string,std::string> recursos;
     std::mutex m;
   public:
-    Recursos_protegidos(const std::string& root_file):
+    explicit Recursos_protegidos(const std::string& root_file):
       root_file(root_file),
       m()
       {}
