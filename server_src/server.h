@@ -21,7 +21,7 @@ class Server{
     Server(const std::string& service,
           const std::string& root_file);
     std::string get_contenido_recurso(const std::string& recurso) const;
-    std::string get_archivo_root();
+    //std::string get_archivo_root();
     void run();
     void procesar_request();
     void shutdown();

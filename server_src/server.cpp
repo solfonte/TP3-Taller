@@ -28,10 +28,10 @@ void Server::run(){
 std::string Server::get_contenido_recurso(const std::string& recurso) const{
   return this->recursos.get_contenido_recurso(recurso);
 }
-
+/*
 std::string Server::get_archivo_root(){
   return this->root_file;
-}
+}*/
 
 void Server::guardar_recurso(const std::string& recurso,
                             const std::string& contenido){
