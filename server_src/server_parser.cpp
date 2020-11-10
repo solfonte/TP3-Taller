@@ -27,20 +27,20 @@ std::string generar_recurso(const std::string& petitorio){
   return recurso;
 }
 
-static Metodo* parsear_metodo_get(Recursos_protegidos* recursos,
+static Metodo* parsear_metodo_get(Recursos_protegidos& recursos,
                             const std::string& petitorio){
   int res = petitorio.find("/ HTTP");
   if (res >= 0){
-    return new GetSinRecurso(recursos->get_archivo_root());
+    return new GetSinRecurso(recursos.get_archivo_root());
   }else{
     std::string recurso = generar_recurso(petitorio);
-    std::string contenido = recursos->get_contenido_recurso(recurso);
+    std::string contenido = recursos.get_contenido_recurso(recurso);
     bool recurso_existe = (contenido.size() > 0? true:false);
     return new GetConRecurso(recurso_existe,contenido);
   }
 }
 
-static Metodo* parsear_metodo_post(Recursos_protegidos* recursos,
+static Metodo* parsear_metodo_post(Recursos_protegidos& recursos,
                             const std::string& petitorio){
   int res = petitorio.find("/ HTTP");
   if (res >= 0){
@@ -48,12 +48,12 @@ static Metodo* parsear_metodo_post(Recursos_protegidos* recursos,
   }else{
     std::string recurso = generar_recurso(petitorio);
     std::string contenido = generar_contenido_recurso(petitorio);
-    recursos->guardar_recurso(recurso,contenido);
+    recursos.guardar_recurso(recurso,contenido);
     return new PostConRecurso(contenido);
   }
 }
 
-Metodo* Parser::run(Recursos_protegidos* recursos,
+Metodo* Parser::run(Recursos_protegidos& recursos,
                     const std::string& petitorio){
   int res_get = petitorio.find("GET");
   int res_post = petitorio.find("POST");

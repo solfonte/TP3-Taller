@@ -7,7 +7,7 @@
 
 class Parser {
   public:
-    Metodo* run(Recursos_protegidos* recursos, const std::string& buffer);
+    Metodo* run(Recursos_protegidos& recursos, const std::string& buffer);
 };
 
 #endif

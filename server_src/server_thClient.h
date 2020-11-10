@@ -9,12 +9,12 @@ class ThClient: public Thread{
     Socket peer;
     std::atomic<bool> keep_talking;
     std::atomic<bool> is_running;
-    Recursos_protegidos* recursos;
+    Recursos_protegidos& recursos;
     std::mutex &m;
     void run() override;
 
   public:
-    ThClient(Socket peer,Recursos_protegidos* recursos,std::mutex &m):
+    ThClient(Socket peer,Recursos_protegidos& recursos,std::mutex &m):
     peer(std::move(peer)),
     keep_talking(true),
     is_running(true),

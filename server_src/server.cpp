@@ -21,7 +21,7 @@ void Server::shutdown(){
 void Server::run(){
   const char* servicio_aux = this->service.c_str();
   this->aceptador.bind_and_listen(INADDR_ANY,servicio_aux);
-  this->thread = new ThAceptador(&this->aceptador,&recursos,this->m);
+  this->thread = new ThAceptador(&this->aceptador,recursos,this->m);
   (*this->thread)();
 }
 
