@@ -6,7 +6,8 @@ PostSinRecurso::PostSinRecurso(){
 }
 
 std::string GetSinRecurso::obtener_respuesta(){
-  std::string respuesta = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n" + this->contenido;
+  std::string respuesta = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n"
+                          + this->contenido;
   /*std::ifstream fs;
   fs.open(this->archivo);
   if (!fs){
