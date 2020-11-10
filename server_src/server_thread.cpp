@@ -7,6 +7,7 @@
 void Thread::start() {
     this->thread = std::thread(&Thread::run,this);
 }
+
 void Thread::join() {
     thread.join();
 }
@@ -15,7 +16,7 @@ Thread::Thread(Thread&& other){
   this->thread = std::move(other.thread);
 }
 
-std::string crear_primer_linea(const std::string& petitorio){
+static std::string crear_primer_linea(const std::string& petitorio){
   int pos = petitorio.find('\n');
   std::string primer_linea = petitorio;
   if (pos > -1){
@@ -47,7 +48,7 @@ void ThClient::run(){
 
 void ThClient::stop(){
   this->keep_talking = false;
-  this->peer.cerrar_conexion(SHUT_RD);//a cheqyear
+  this->peer.cerrar_conexion(SHUT_RD);
   this->peer.cerrar_conexion(SHUT_WR);
   this->peer.cerrar();
 }
@@ -61,7 +62,6 @@ void ThAceptador::run(){
       this->aceptador->aceptar(peer);
       ThClient* cliente = new ThClient(std::move(peer),this->recursos,this->m);
       this->clientes.push_back(cliente);
-      //cliente->start();
       (*cliente)();
     }catch(const SocketException& se){
       seguir_aceptando = false;
@@ -70,7 +70,7 @@ void ThAceptador::run(){
     for (int i = 0; i < cantidad_clientes; i++){
       if (this->clientes[i]->is_dead()){
         this->clientes[i]->join();
-        delete this->clientes[i];//cambiar a lista
+        delete this->clientes[i];
         this->clientes.erase(this->clientes.begin() + i);
         cantidad_clientes --;
       }

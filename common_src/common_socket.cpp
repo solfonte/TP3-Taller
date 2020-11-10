@@ -1,6 +1,5 @@
 #include "common_socket.h"
 #include <cstring>
-#include <iostream>
 #define ERROR -1
 
 Socket::Socket(Socket&& socket){
@@ -27,9 +26,9 @@ void Socket::bind_and_listen(const char* host,const char* service){
   struct addrinfo* resultados;
   hints_innit(&hints,AF_INET,SOCK_STREAM,AI_PASSIVE);
   if (getaddrinfo(NULL,service, &hints,&resultados) < 0){
-    throw SocketException("Fallo la obtencion de conexiones\n");//esta bien??
+    throw SocketException("Fallo la obtencion de conexiones\n");
   }
-  //capaz iterar
+
   int fd = socket(resultados->ai_family, resultados->ai_socktype,
                   resultados->ai_protocol);
   if (fd < 0){
@@ -60,6 +59,7 @@ void Socket::aceptar(Socket& peer)const {
 
 Socket::~Socket(){
 }
+
 void Socket::cerrar(){
   if (this->fd > -1){
     close(this->fd);

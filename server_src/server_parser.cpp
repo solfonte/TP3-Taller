@@ -28,7 +28,7 @@ std::string generar_recurso(const std::string& petitorio){
   return recurso;
 }
 
-Metodo* parsear_metodo_get(Recursos_protegidos* recursos,
+static Metodo* parsear_metodo_get(Recursos_protegidos* recursos,
                             const std::string& petitorio){
   int res = petitorio.find("/ HTTP");
   if (res >= 0){
@@ -41,7 +41,7 @@ Metodo* parsear_metodo_get(Recursos_protegidos* recursos,
   }
 }
 
-Metodo* parsear_metodo_post(Recursos_protegidos* recursos,
+static Metodo* parsear_metodo_post(Recursos_protegidos* recursos,
                             const std::string& petitorio){
   int res = petitorio.find("/ HTTP");
   if (res >= 0){

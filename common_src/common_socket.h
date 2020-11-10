@@ -25,8 +25,9 @@ class Socket{
     void cerrar();
     Socket(Socket&& socket);
     ~Socket();
-    void aceptar(Socket& peer)const;
     Socket();
+    Socket(const Socket& socket) = delete;
+    void aceptar(Socket& peer)const;
     void enviar(const char* buffer, size_t length);
     void recibir(std::stringstream& petitorio);
     void conectar(const char* host,const char* service);

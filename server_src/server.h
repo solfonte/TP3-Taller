@@ -20,16 +20,7 @@ class Server{
 
   public:
     Server(const std::string& service,
-          const std::string& root_file,std::mutex &m):
-    service(service),
-    root_file(root_file),
-    aceptador(),
-    petitorio(),
-    recursos(root_file,m),
-    thread(),
-    m(m)
-    //verificar que exista archivo
-    {}
+          const std::string& root_file,std::mutex &m);
     std::string get_contenido_recurso(const std::string& recurso) const;
     std::string get_archivo_root();
     void run();
@@ -37,7 +28,6 @@ class Server{
     void shutdown();
     void guardar_recurso(const std::string& recurso,
                           const std::string& contenido);
-    //Server& operator=(Server&& other);
 };
 
 #endif

@@ -10,11 +10,15 @@ std::string GetSinRecurso::obtener_respuesta(){
   std::string respuesta = "HTTP/1.1 200 OK\nContent-Type: text/html\n\n";
   std::ifstream fs;
   fs.open(this->archivo);
-  std::string contenido;
-  while (getline(fs,contenido,'\n')){
-    respuesta += contenido;
+  if(!fs){
+    respuesta += "ERROR: no se pudo abrir el archivo" + this->archivo + "\n";
+  }else{
+    std::string contenido;
+    while (getline(fs,contenido,'\n')){
+      respuesta += contenido;
+    }
+    fs.close();
   }
-  fs.close();
   return respuesta;
 }
 
