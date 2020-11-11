@@ -26,6 +26,7 @@ void ThClient::run(){
   Metodo* metodo = parser.run(this->recursos,petitorio.str());
   std::string rta = metodo->obtener_respuesta();
   this->peer.enviar(rta.c_str(),rta.size());
+  this->peer.cerrar_conexion(SHUT_WR);
   delete metodo;
   this->is_running = false;
 }

@@ -1,4 +1,5 @@
 #include "server_thAceptador.h"
+#include <iostream>
 
 void ThAceptador::operator()(){
   this->start();
@@ -19,8 +20,9 @@ void ThAceptador::remover_hilos_finalizados(){
 void ThAceptador::detener_clientes(){
   int cantidad_clientes = this->clientes.size();
   for (int i = 0; i < cantidad_clientes; i++){
-    this->clientes[i]->join();
+    std::cout << "entre a detener\n";
     this->clientes[i]->stop();
+    this->clientes[i]->join();
     delete this->clientes[i];
     this->clientes.erase(this->clientes.begin() + i);
     cantidad_clientes --;
@@ -40,6 +42,6 @@ void ThAceptador::run(){
       seguir_aceptando = false;
     }
     this->remover_hilos_finalizados();
-    this->detener_clientes();
   }
+  this->detener_clientes();
 }
