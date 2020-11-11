@@ -22,6 +22,5 @@ void Client::recibir(){
   this->client.recibir(this->respuesta);
   std::string rta = this->respuesta.str();
   std::cout << rta;
-  this->client.cerrar_conexion(SHUT_RD);
   this->client.cerrar();
 }
