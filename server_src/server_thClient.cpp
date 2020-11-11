@@ -27,6 +27,7 @@ void ThClient::run(){
   std::string rta = metodo->obtener_respuesta();
   this->peer.enviar(rta.c_str(),rta.size());
   this->peer.cerrar_conexion(SHUT_WR);
+  this->peer.cerrar();
   delete metodo;
   this->is_running = false;
 }
