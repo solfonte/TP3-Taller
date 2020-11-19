@@ -19,8 +19,15 @@ void Client::enviar(){
 }
 
 void Client::recibir(){
-  this->client.recibir(this->respuesta);
-  std::string rta = this->respuesta.str();
+  char buffer[20];
+  size_t length = 20;
+  ssize_t cant_recibido;
+  std::stringstream respuesta;
+  do{
+    cant_recibido = this->client.recibir(buffer,length);
+    respuesta.write(buffer,cant_recibido);
+  }while (cant_recibido > 0);
+  std::string rta = respuesta.str();
   std::cout << rta;
   this->client.cerrar();
 }

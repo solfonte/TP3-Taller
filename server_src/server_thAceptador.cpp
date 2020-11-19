@@ -6,14 +6,16 @@ void ThAceptador::operator()(){
 
 void ThAceptador::remover_hilos_finalizados(){
   int cantidad_clientes = this->clientes.size();
+  std::vector<ThClient*> clientes_filtrados;
   for (int i = 0; i < cantidad_clientes; i++){
     if (this->clientes[i]->is_dead()){
       this->clientes[i]->join();
       delete this->clientes[i];
-      this->clientes.erase(this->clientes.begin() + i);
-      cantidad_clientes --;
+    }else{
+      clientes_filtrados.push_back(this->clientes[i]);
     }
   }
+  this->clientes.swap(clientes_filtrados);
 }
 
 void ThAceptador::detener_clientes(){
@@ -22,8 +24,6 @@ void ThAceptador::detener_clientes(){
     this->clientes[i]->stop();
     this->clientes[i]->join();
     delete this->clientes[i];
-    this->clientes.erase(this->clientes.begin() + i);
-    cantidad_clientes --;
   }
 }
 

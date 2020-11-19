@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
     std::cout << "La cantidad de argumentos es incorrecta\n";
     return 0;
   }
-  Client cliente = Client(host,service);
+  Client cliente(host,service);
   try{
     cliente.run();
   }catch(const SocketException& se){

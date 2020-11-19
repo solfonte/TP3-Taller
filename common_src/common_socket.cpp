@@ -21,31 +21,33 @@ Socket::Socket(){
 }
 
 void Socket::bind_and_listen(const char* host,const char* service){
-  int val = 1;
+  int val = 1,resultado_bind = ERROR, resultado_listen = ERROR;
   struct addrinfo hints;
-  struct addrinfo* resultados;
+  struct addrinfo* resultados,*ptr;
+  bool conecte = false;
   hints_innit(&hints,AF_INET,SOCK_STREAM,AI_PASSIVE);
   if (getaddrinfo(NULL,service, &hints,&resultados) < 0){
     throw SocketException("Fallo la obtencion de conexiones\n");
   }
-
-  int fd = socket(resultados->ai_family, resultados->ai_socktype,
-                  resultados->ai_protocol);
-  if (fd < 0){
-    freeaddrinfo(resultados);
-    throw SocketException("Fallo la creacion del socket\n");
+  ptr = resultados;
+  while (ptr != NULL && !conecte){
+    int fd = socket(resultados->ai_family, resultados->ai_socktype,
+                    resultados->ai_protocol);
+    if (fd >= 0){
+      this->fd = fd;
+      setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
+      resultado_bind =  bind(this->fd, resultados->ai_addr,
+                              resultados->ai_addrlen);
+    }
+    conecte = (resultado_bind != ERROR? true:false);
+    ptr = ptr->ai_next;
   }
-  this->fd = fd;
-  setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &val, sizeof(val));
-  int resultado_bind =  bind(this->fd, resultados->ai_addr,
-                          resultados->ai_addrlen);
   freeaddrinfo(resultados);
-  if (resultado_bind == ERROR){
-    throw SocketException("No se pudo realizar el bind del socket\n");
+  if (conecte){
+    resultado_listen = listen(fd,15);
   }
-  int resultado_listen = listen(fd,15);
-  if (resultado_listen < 0){
-    throw SocketException("Fallo el listen del socket\n");
+  if (resultado_listen == ERROR || !conecte){
+    throw SocketException("Fallo la conexion del socket listener\n");
   }
 }
 
@@ -66,26 +68,14 @@ void Socket::cerrar(){
   }
 }
 
-void Socket::recibir(std::stringstream& petitorio){
+ssize_t Socket::recibir(char* buffer, size_t length){
   ssize_t bytes_recv = 0;
-  bool termine = false;
-  char buffer[20];
-  size_t length = 20;
-  while (!termine){
     size_t tam_recv = length - (size_t)bytes_recv -1;
     ssize_t resultado_recv = recv(this->fd,buffer,tam_recv,0);
     bytes_recv = resultado_recv;
     if (resultado_recv == -1){
         throw SocketException("Fallo el receive");
-    }else if (resultado_recv == 0){
-      termine = true;
-    }else{
-      if (resultado_recv < (ssize_t)length){
-      }
-      petitorio.write(buffer,resultado_recv);
-      bytes_recv = 0;
-    }
-  }
+    }return bytes_recv;
 }
 
 void Socket::conectar(const char* host,const char* service){
@@ -105,8 +95,6 @@ void Socket::conectar(const char* host,const char* service){
     if (fd != ERROR){
       res_connect = connect(fd,ptr->ai_addr,ptr->ai_addrlen);
       conecte = (res_connect != ERROR?true:false);
-    }else{
-      throw SocketException("Fallo la creacion del socket\n");
     }
     ptr = ptr->ai_next;
   }

@@ -22,6 +22,7 @@ class ThClient: public Thread{
     bool is_dead();
     void stop();
     void operator()() override;
+    void recibir(std::stringstream& petitorio);
 };
 
 #endif

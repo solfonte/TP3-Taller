@@ -16,12 +16,24 @@ void ThClient::operator()(){
   this->start();
 }
 
+void ThClient::recibir(std::stringstream& petitorio){
+  char buffer[20];
+  size_t length = 20;
+  ssize_t cant_recibido;
+  do{
+    cant_recibido = this->peer.recibir(buffer,length);
+    petitorio.write(buffer,cant_recibido);
+  }while (cant_recibido > 0);
+}
+
 void ThClient::run(){
   std::stringstream petitorio;
-  this->peer.recibir(petitorio);
+  this->recibir(petitorio);
+  //this->peer.recibir(petitorio);
   this->peer.cerrar_conexion(SHUT_RD);
   std::string primer_linea_petitorio = crear_primer_linea(petitorio.str());
-  std::cout << primer_linea_petitorio << "\n";
+  primer_linea_petitorio += "\n";
+  std::cout << primer_linea_petitorio;
   Parser parser;
   Metodo* metodo = parser.run(this->recursos,petitorio.str());
   std::string rta = metodo->obtener_respuesta();
@@ -34,8 +46,7 @@ void ThClient::run(){
 
 void ThClient::stop(){
   this->keep_talking = false;
-  this->peer.cerrar_conexion(SHUT_RD);
-  this->peer.cerrar_conexion(SHUT_WR);
+  this->peer.cerrar_conexion(SHUT_RDWR);
   this->peer.cerrar();
 }
 

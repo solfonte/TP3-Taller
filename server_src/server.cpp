@@ -25,7 +25,7 @@ void Server::run(){
   (*this->thread)();
 }
 
-std::string Server::get_contenido_recurso(const std::string& recurso) const{
+std::string Server::get_contenido_recurso(const std::string& recurso){
   return this->recursos.get_contenido_recurso(recurso);
 }
 

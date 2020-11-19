@@ -29,7 +29,7 @@ class Socket{
     Socket(const Socket& socket) = delete;
     void aceptar(Socket& peer)const;
     void enviar(const char* buffer, size_t length);
-    void recibir(std::stringstream& petitorio);
+    ssize_t recibir(char* buffer, size_t length);
     void conectar(const char* host,const char* service);
     void cerrar_conexion(int modo);
 };

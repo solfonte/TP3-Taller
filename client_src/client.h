@@ -9,7 +9,6 @@ class Client{
     Socket client;
     std::string host;
     std::string service;
-    std::stringstream respuesta;
   public:
     Client(const std::string& host,const std::string& service):
       client(),
