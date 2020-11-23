@@ -69,13 +69,12 @@ void Socket::cerrar(){
 }
 
 ssize_t Socket::recibir(char* buffer, size_t length){
-  ssize_t bytes_recv = 0;
-    size_t tam_recv = length - (size_t)bytes_recv -1;
-    ssize_t resultado_recv = recv(this->fd,buffer,tam_recv,0);
-    bytes_recv = resultado_recv;
-    if (resultado_recv == -1){
-        throw SocketException("Fallo el receive");
-    }return bytes_recv;
+  size_t tam_recv = length - 1;
+  ssize_t resultado_recv = recv(this->fd,buffer,tam_recv,0);
+  if (resultado_recv == -1){
+    throw SocketException("Fallo el receive");
+  }
+  return resultado_recv;
 }
 
 void Socket::conectar(const char* host,const char* service){

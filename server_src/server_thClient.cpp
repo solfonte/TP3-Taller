@@ -29,7 +29,6 @@ void ThClient::recibir(std::stringstream& petitorio){
 void ThClient::run(){
   std::stringstream petitorio;
   this->recibir(petitorio);
-  //this->peer.recibir(petitorio);
   this->peer.cerrar_conexion(SHUT_RD);
   std::string primer_linea_petitorio = crear_primer_linea(petitorio.str());
   primer_linea_petitorio += "\n";
