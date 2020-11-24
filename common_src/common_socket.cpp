@@ -47,6 +47,7 @@ void Socket::bind_and_listen(const char* host,const char* service){
     resultado_listen = listen(fd,15);
   }
   if (resultado_listen == ERROR || !conecte){
+    this->cerrar();
     throw SocketException("Fallo la conexion del socket listener\n");
   }
 }
