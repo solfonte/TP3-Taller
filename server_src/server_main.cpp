@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
     std::cout << "La cantidad de argumentos es incorrecta\n";
     return 1;
   }
-  Server server = Server(puerto,root_file);
+  Server server(puerto,root_file);
   try{
     server.run();
   }catch(const SocketException& se){
