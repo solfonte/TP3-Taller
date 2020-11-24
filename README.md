@@ -28,11 +28,14 @@ por:
 ```
 this->peer.cerrar_conexion(SHUT_RDWR);
 ```
--Cambio la contruccion del cliente en client_main.cpp, ya que antes se estaba copiando, a:  
+-Cambio la contruccion del cliente en client_main.cpp y del servidor en server_main.cpp, ya que antes se estaban copiando, a:  
 ```
-Client cliente(host,service);
+Client cliente(host,service);  
+
+Server server(puerto,root_file);
 ```
 -Cambio la modificacion del contenedor de ThClient en la clase ThAceptador, de manera que este no se modifique durante la iteracion del mismo, utilizando el metodo swap. Se itera sobre el vector de hilos del cliente, los que no son eliminados se guardan en otro vector clientes_filtrados, y al finalizar la iteracion se realiza un swap entre el vector atributo de la clase ThAceptador y el vector clientes_filtrados.  
 -Cambio la firma del metodo "recibir" de la clase Socket, para que ahora reciba un buffer y su tamaño por parametro. Ahora las clases que reciban mensajes son las que escriben el buffer sobre un stringstream, para ir concantenando el mensaje recibido, y no como antes que lo hacia el metodo "recibir" del socket.  
 -Saco la excepcion que se lanzaba durante la iteracion de la lista de resultados en el metodo "conectar" de la clase Socket que indicaba que habia fallado la creacion del mismo. Ahora solo se lanza excepcion si al finalizar la iteracion no logre conectar.  
 -Itero sobre la lista de resultados obtenidos por "getaddrinfo" en el metodo de la clase Socket "bind_and_listen".  
+-Agrego un cierre de los sockets e los metodos "connect" como en "bind_and_listen" en caso de error, ya que si antes lograba crear el socket pero no se podia realizar el connect/bind respectivamente, se lanzaba una excepcion y no se cerraban los sockets.
