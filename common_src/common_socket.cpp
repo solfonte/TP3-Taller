@@ -100,6 +100,7 @@ void Socket::conectar(const char* host,const char* service){
   }
   freeaddrinfo(resultados);
   if (!conecte){
+    this->cerrar();
     throw SocketException("Fallo la conexion del socket\n");
   }
 }
