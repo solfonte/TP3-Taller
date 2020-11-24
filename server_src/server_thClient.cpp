@@ -10,6 +10,7 @@ static std::string crear_primer_linea(const std::string& petitorio){
   if (pos > -1){
     primer_linea = petitorio.substr(0,pos);
   }
+  primer_linea += "\n";
   return primer_linea;
 }
 void ThClient::operator()(){
@@ -31,7 +32,6 @@ void ThClient::run(){
   this->recibir(petitorio);
   this->peer.cerrar_conexion(SHUT_RD);
   std::string primer_linea_petitorio = crear_primer_linea(petitorio.str());
-  primer_linea_petitorio += "\n";
   std::cout << primer_linea_petitorio;
   Parser parser;
   Metodo* metodo = parser.run(this->recursos,petitorio.str());

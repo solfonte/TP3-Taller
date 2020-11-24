@@ -17,12 +17,7 @@ Esta clase fue implementada con el fin de encapsular todos los datos accedidos e
 
 **correcciones**  
 -Agrego un lock en el metodo get_contenido_recurso() de la clase recursos protegidos ya que antes habia una race condition que no se estaba protegiendo como se debia. Ademas, se tuvo remover el 'const' de la funcion que hacia referencia a que la clase Recursos_protegidos no estaba siendo modificada por el metodo.  
--Modifico el llamado al operador << en la clase ThClient, el cual era una race condition, a:  
-```
-primer_linea_petitorio += "\n";
-std::cout << primer_linea_petitorio;
-```  
-de esta manera solo se realiza un llamado y es atomico.  
+-Modifico el llamado al operador << en la clase ThClient, el cual era una race condition. Ahora primero se concatena la string con el "\n" y luego se hace el llamado al operador <<. De esta manera el llamado es atomico.  
 
 -Modifico las lineas:
 ```
